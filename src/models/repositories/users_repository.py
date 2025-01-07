@@ -1,6 +1,7 @@
 from sqlite3 import Connection
+from src.models.interfaces.users_repository_interface import UsersRepositoryInterface
 
-class UsersRepository:
+class UsersRepository(UsersRepositoryInterface):
     def __init__(self, connection: Connection) -> None:
         self.__connection = connection
 
@@ -20,7 +21,7 @@ class UsersRepository:
         )
         self.__connection.commit()
 
-    def get_user_by_id(self, user_id: int):
+    def get_user_by_id(self, user_id: int) -> tuple[int, str, float]:
         cursor = self.__connection.cursor()
         cursor.execute("SELECT * FROM users WHERE id=?", (user_id,))
         return cursor.fetchone()
