@@ -10,7 +10,7 @@ class EditBalanceView(ViewInterface):
     def handle(self, http_request: HttpRequest) -> HttpResponse:
         new_balance = http_request.body['new_balance']
         user_id = http_request.body['user_id']
-        self.__validate_inputs(new_balance, user_id)
+        self.__validate_inputs(user_id, new_balance)
         response = self.edit_balance_controller.edit_balance(user_id, new_balance)
         return HttpResponse(status_code=200, body={"data": response})
     
