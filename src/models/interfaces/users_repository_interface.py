@@ -13,3 +13,7 @@ class UsersRepositoryInterface(ABC):
     def get_user_by_id(self, id: int) -> tuple[int, str, float]:
         pass
 
+    @abstractmethod
+    def get_user_by_username(self, username: str) -> tuple[int, str, float]:
+        pass
+

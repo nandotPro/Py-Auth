@@ -26,3 +26,9 @@ class UsersRepository(UsersRepositoryInterface):
         cursor.execute("SELECT * FROM users WHERE id=?", (user_id,))
         return cursor.fetchone()
 
+    def get_user_by_username(self, username: str) -> tuple[int, str, float]:
+        cursor = self.__connection.cursor()
+        cursor.execute("SELECT * FROM users WHERE username=?", (username,))
+        return cursor.fetchone()
+
+

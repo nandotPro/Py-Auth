@@ -54,6 +54,16 @@ def test_get_user_by_id(users_repository):
     assert cursor.execute.call_args[0][0] == "SELECT * FROM users WHERE id=?"
     assert cursor.execute.call_args[0][1] == (1,)
 
+def test_get_user_by_username(users_repository):
+    """Test retrieving user by username functionality"""
+    repository_instance, mock_connection = users_repository
+
+    repository_instance.get_user_by_username("John Doe")
+
+    cursor = mock_connection.cursor.return_value
+    assert cursor.execute.call_args[0][0] == "SELECT * FROM users WHERE username=?"
+    assert cursor.execute.call_args[0][1] == ("John Doe",)
+
 @pytest.mark.skip(reason="Test temporarily skipped")
 def test_repository():
     """Integration test for repository with real database connection"""
