@@ -15,7 +15,7 @@ class LoginUserController(LoginUserControllerInterface):
         user_id = user[0]
         hashed_password = user[2]
         self.__verify_password(password, hashed_password)
-        token = self.__create_jwt_token({"user_id": user_id})
+        token = self.__create_jwt_token(user_id)
         return self.__format_response(username, token)
     
 

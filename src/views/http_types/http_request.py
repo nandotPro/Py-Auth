@@ -4,9 +4,9 @@ class HttpRequest:
             body: dict = None, 
             headers: dict = None, 
             params: dict = None,
-            token_infos: dict = None
+            token_data: dict = None
         ) -> None:
         self.body = body
         self.headers = headers
         self.params = params
-        self.token_infos = token_infos
+        self.token_data = token_data
