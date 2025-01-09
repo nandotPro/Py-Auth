@@ -9,10 +9,12 @@ class MockController:
     
 def test_edit_balance_view():
     body = {
-        "user_id": 1,
         "new_balance": 100.0
     }
-    request = HttpRequest(body=body)
+    params = {
+        "user_id": 1
+    }
+    request = HttpRequest(body=body, params=params)
     response = EditBalanceView(MockController()).handle(request)
     assert isinstance(response, HttpResponse)
     assert response.status_code == 200
@@ -20,9 +22,11 @@ def test_edit_balance_view():
 
 def test_edit_balance_view_invalid_inputs():
     body = {
-        "user_id": "1",
         "new_balance": 100.0
     }
-    request = HttpRequest(body=body)
+    params = {
+        "user_id": "1"
+    }
+    request = HttpRequest(body=body, params=params)
     with pytest.raises(Exception):
         EditBalanceView(MockController()).handle(request)
