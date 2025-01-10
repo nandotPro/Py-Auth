@@ -2,6 +2,7 @@ from src.controllers.interfaces.edit_balance_controller_interface import EditBal
 from src.views.interfaces.view_interface import ViewInterface
 from src.views.http_types.http_request import HttpRequest
 from src.views.http_types.http_response import HttpResponse
+from src.errors.errors_types.http_bad_request import HttpBadRequestError
 
 class EditBalanceView(ViewInterface):
     def __init__(self, edit_balance_controller: EditBalanceControllerInterface) -> None:
@@ -21,13 +22,13 @@ class EditBalanceView(ViewInterface):
     def __validate_inputs(self, user_id: any, new_balance: any) -> None:
         try:
             if not isinstance(user_id, int):
-                raise ValueError("user_id must be an integer")
+                raise HttpBadRequestError("user_id must be an integer")
                 
             if not isinstance(new_balance, (int, float)):
-                raise ValueError("new_balance must be a number")
+                raise HttpBadRequestError("new_balance must be a number")
                 
             if new_balance < 0:
-                raise ValueError("new_balance cannot be negative")
+                raise HttpBadRequestError("new_balance cannot be negative")
                 
-        except Exception as error:
-            raise Exception('Invalid inputs') from error
+        except HttpBadRequestError as error:
+            raise HttpBadRequestError('Invalid inputs') from error
